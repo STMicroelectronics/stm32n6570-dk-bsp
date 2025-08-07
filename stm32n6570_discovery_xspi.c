@@ -118,7 +118,7 @@ XSPI_NOR_Ctx_t XSPI_Nor_Ctx[XSPI_NOR_INSTANCES_NUMBER]  = {{
 /** @addtogroup STM32N6570_DK_XSPI_RAM_Exported_Variables
   * @{
   */
-extern XSPI_RAM_Ctx_t XSPI_Ram_Ctx[XSPI_NOR_INSTANCES_NUMBER];
+extern XSPI_RAM_Ctx_t XSPI_Ram_Ctx[XSPI_RAM_INSTANCES_NUMBER];
 
 XSPI_HandleTypeDef hxspi_ram[XSPI_RAM_INSTANCES_NUMBER] = {0};
 
