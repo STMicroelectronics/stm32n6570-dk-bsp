@@ -1,0 +1,189 @@
+
+
+# Release Notes for
+# <mark>STM32N6570-DK</mark>
+Copyright &copy; 2024 STMicroelectronics\
+    
+[![ST logo](_htmresc/st_logo_2020.png)](https://www.st.com)
+
+# Purpose
+
+This driver provides a set of functions to manage:
+
+- LEDs, push-button, Virtual Com Port (VCP), Audio, USB-PD, LCD, camera sensor and external memories access on STM32N6570-DK Kit from STMicroelectronics
+
+
+# Update History
+
+<label for="collapse-section5" checked aria-hidden="true">__V1.4.0 / 03-June-2026__</label>
+<div>
+
+## Main Changes
+
+###  Fourth maintenance release of board drivers supporting **STM32N6570-DK board** (MB1939C)
+
+
+## Contents
+
+  - stm32n6570_discovery_xspi update:
+    - Remove Delay inside DOPI SOPI functions .
+    - Adjust CSHT to feat with MX66 Tshsl timing.
+    - Fix BSP_XSPI_NOR_LeaveDeepPowerDown() to use ReleasePowerDown.
+
+## Known Limitations
+
+  - None
+
+## Dependencies
+
+  - ISP library v1.2.1
+
+## Notes
+
+
+*stm32n6570_discovery_conf_template.h* file must be copied in user application as *stm32n6570_discovery_conf.h* with optional configuration update
+
+
+
+</div>
+
+<label for="collapse-section4" checked aria-hidden="true">__V1.3.0 / 29-October-2025__</label>
+<div>
+
+## Main Changes
+
+###  Third maintenance release of board drivers supporting **STM32N6570-DK board** (MB1939C)
+
+
+## Contents
+
+  - Fix external memory size definition in BSP_XSPI_NOR_Init() API
+  - Enhance XSPI_NOR_ResetMemory() and XSPI_NOR_EnterDOPIMode() APIs to decrease NOR initialization time
+  - Correct XSPI_Ram_Ctx[] array number of entries definition
+  - Correct SAI_MspInit() to ensure audio output is available when all RAM is non-cacheable
+  - Update isp_param_conf.h to be aligned with ISP library v1.2.0
+
+
+
+## Known Limitations
+
+  - None
+
+## Dependencies
+
+  - ISP library v1.2.0
+
+## Notes
+
+
+*stm32n6570_discovery_conf_template.h* file must be copied in user application as *stm32n6570_discovery_conf.h* with optional configuration update
+
+
+
+</div>
+
+
+
+
+<label for="collapse-section3" checked aria-hidden="true">__V1.2.0 / 04-June-2025__</label>
+<div>
+
+## Main Changes
+
+###  Second maintenance release of board drivers supporting **STM32N6570-DK board** (MB1939C)
+
+
+## Contents
+
+  - Fix STM32N6570_DK_BSP_VERSION_MAIN/SUB1/SUB2/RC constants definitions to correct Misra-C:2012 R12.2 warnings
+
+
+## Known Limitations
+
+  - None
+
+## Dependencies
+
+  - ISP library v1.0.2
+
+## Notes
+
+
+*stm32n6570_discovery_conf_template.h* file must be copied in user application as *stm32n6570_discovery_conf.h* with optional configuration update
+
+
+
+</div>
+
+
+<label for="collapse-section2" checked aria-hidden="true">__V1.1.0 / 05-February-2025__</label>
+<div>
+
+## Main Changes
+
+###  First maintenance release of board drivers supporting **STM32N6570-DK board** (MB1939C)
+
+
+## Contents
+
+  - Set NOR FLASH XSPI IO speed from GPIO_SPEED_FREQ_HIGH to GPIO_SPEED_FREQ_VERY_HIGH
+  - Optimize PSRAM access parameters in MX_XSPI_RAM_Init()
+  - Increase SD_WRITE_TIMEOUT and SD_READ_TIMEOUT 
+  - Correct time-out management in BSP_SD_WriteBlocks()
+  - Correct BSP_SD_Init() to fix initialization issue in forcing then releasing SDMMC instances reset
+  - Align HAL_DCMIPP_PIPE_VsyncEventCallback() with latest ISP library tag
+  - Add BSP camera APIs BSP_CAMERA_FullPlanarStart(), BSP_CAMERA_SemiPlanarStart(), BSP_CAMERA_FullPlanarDoubleBufferStart() and BSP_CAMERA_SemiPlanarDoubleBufferStart()
+
+
+## Known Limitations
+
+  - None
+
+## Dependencies
+
+  - ISP library v1.0.2
+
+## Notes
+
+
+*stm32n6570_discovery_conf_template.h* file must be copied in user application as *stm32n6570_discovery_conf.h* with optional configuration update
+
+
+
+</div>
+
+
+<label for="collapse-section1" checked aria-hidden="true">__V1.0.0 / 30-October-2024__</label>
+<div>
+
+## First Release
+
+###  First official release of **STM32CubeN6** firmware package supporting **STM32N6xx** devices
+
+## Contents
+
+  - First official release of board drivers for **STM32N6570-DK board** (MB1939C)
+    - in line with STM32Cube BSP drivers development guidelines (UM2298 - revision 2)
+
+
+## Known Limitations
+
+None
+
+## Dependencies
+
+None
+
+## Notes
+
+*stm32n6570_discovery_conf_template.h* file must be copied in user application as *stm32n6570_discovery_conf.h* with optional configuration update
+
+</div>
+
+
+
+For complete documentation on STM32,
+visit: [www.st.com](http://www.st.com)
+
+*This release note uses up to date web standards and, for this reason, should not be opened with Internet Explorer but preferably with popular browsers such as Google Chrome, Mozilla Firefox, Opera or Microsoft Edge.*
+<abbr title="Based on template cx566953 version 2.0">Info</abbr>

@@ -1,6 +1,6 @@
 # BSP STM32N6570-DK Component
 
-![latest tag](https://img.shields.io/github/v/tag/STMicroelectronics/stm32n6570-dk-bsp.svg?color=brightgreen)
+![tag](https://img.shields.io/badge/tag-v1.4.0-brightgreen.svg)
 
 ## Overview
 
