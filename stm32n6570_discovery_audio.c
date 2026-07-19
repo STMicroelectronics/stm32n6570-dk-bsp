@@ -3218,7 +3218,7 @@ static void SAI_MspInit(SAI_HandleTypeDef *hsai)
     dmaNodeConfig.Init.DestBurstLength                = 1;
     dmaNodeConfig.Init.Priority                       = DMA_HIGH_PRIORITY;
     dmaNodeConfig.Init.TransferEventMode              = DMA_TCEM_BLOCK_TRANSFER;
-    dmaNodeConfig.Init.TransferAllocatedPort          = DMA_SRC_ALLOCATED_PORT0 | DMA_DEST_ALLOCATED_PORT1;
+    dmaNodeConfig.Init.TransferAllocatedPort          = DMA_SRC_ALLOCATED_PORT1 | DMA_DEST_ALLOCATED_PORT0;
     /* Set node data handling parameters */
     dmaNodeConfig.DataHandlingConfig.DataExchange     = DMA_EXCHANGE_NONE;
     dmaNodeConfig.DataHandlingConfig.DataAlignment    = DMA_DATA_RIGHTALIGN_ZEROPADDED;
