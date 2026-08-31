@@ -155,7 +155,7 @@ typedef struct
   */
 #define STM32N6570_DK_BSP_VERSION_MAIN   (0x01UL) /*!< [31:24] main version */
 #define STM32N6570_DK_BSP_VERSION_SUB1   (0x04UL) /*!< [23:16] sub1 version */
-#define STM32N6570_DK_BSP_VERSION_SUB2   (0x00UL) /*!< [15:8]  sub2 version */
+#define STM32N6570_DK_BSP_VERSION_SUB2   (0x01UL) /*!< [15:8]  sub2 version */
 #define STM32N6570_DK_BSP_VERSION_RC     (0x00UL) /*!< [7:0]  release candidate */
 #define STM32N6570_DK_BSP_VERSION        ((STM32N6570_DK_BSP_VERSION_MAIN << 24)\
                                             |(STM32N6570_DK_BSP_VERSION_SUB1 << 16)\

@@ -1,6 +1,6 @@
 # BSP STM32N6570-DK Component
 
-![tag](https://img.shields.io/badge/tag-v1.4.0-brightgreen.svg)
+![tag](https://img.shields.io/badge/tag-v1.4.1-brightgreen.svg)
 
 ## Overview
 

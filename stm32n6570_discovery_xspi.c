@@ -1642,89 +1642,44 @@ static void XSPI_NOR_MspDeInit(const XSPI_HandleTypeDef *hxspi)
 static int32_t XSPI_NOR_ResetMemory(uint32_t Instance)
 {
   int32_t ret = BSP_ERROR_NONE;
-  uint8_t reg[2] = {0};
-  uint8_t ResetRecoTime = 0U;
 
-  /* Check first the register memory in current mode */
-  if (MX66UW1G45G_ReadStatusRegister(&hxspi_nor[Instance], XSPI_Nor_Ctx[Instance].InterfaceMode,
-                                          XSPI_Nor_Ctx[Instance].TransferRate, reg) != MX66UW1G45G_OK)
+  /* Reset memory in all modes available */
+  if (MX66UW1G45G_ResetEnable(&hxspi_nor[Instance], BSP_XSPI_NOR_SPI_MODE,
+                              BSP_XSPI_NOR_STR_TRANSFER) != MX66UW1G45G_OK)
   {
-     /* Do nothing as maybe nor flash is not accessible */
+    ret = BSP_ERROR_COMPONENT_FAILURE;
   }
-  /* Check the value of the register */
-  else if ((reg[0] & MX66UW1G45G_SR_WIP) != 0U)
+  else if (MX66UW1G45G_ResetMemory(&hxspi_nor[Instance], BSP_XSPI_NOR_SPI_MODE,
+                                   BSP_XSPI_NOR_STR_TRANSFER) != MX66UW1G45G_OK)
   {
-    /* Enable Wait Reset Recovery Time after Reset cmd (WIP detected)*/
-    ResetRecoTime = 1U;
+    ret = BSP_ERROR_COMPONENT_FAILURE;
+  }
+  else if (MX66UW1G45G_ResetEnable(&hxspi_nor[Instance], BSP_XSPI_NOR_OPI_MODE,
+                                   BSP_XSPI_NOR_STR_TRANSFER) != MX66UW1G45G_OK)
+  {
+    ret = BSP_ERROR_COMPONENT_FAILURE;
+  }
+  else if (MX66UW1G45G_ResetMemory(&hxspi_nor[Instance], BSP_XSPI_NOR_OPI_MODE,
+                                   BSP_XSPI_NOR_STR_TRANSFER) != MX66UW1G45G_OK)
+  {
+    ret = BSP_ERROR_COMPONENT_FAILURE;
+  }
+  else if (MX66UW1G45G_ResetEnable(&hxspi_nor[Instance], BSP_XSPI_NOR_OPI_MODE,
+                                   BSP_XSPI_NOR_DTR_TRANSFER) != MX66UW1G45G_OK)
+  {
+    ret = BSP_ERROR_COMPONENT_FAILURE;
+  }
+  else if (MX66UW1G45G_ResetMemory(&hxspi_nor[Instance], BSP_XSPI_NOR_OPI_MODE,
+                                   BSP_XSPI_NOR_DTR_TRANSFER) != MX66UW1G45G_OK)
+  {
+    ret = BSP_ERROR_COMPONENT_FAILURE;
   }
   else
   {
-    /* Do nothing */
+    XSPI_Nor_Ctx[Instance].IsInitialized = XSPI_ACCESS_INDIRECT;     /* After reset S/W setting to indirect access  */
+    XSPI_Nor_Ctx[Instance].InterfaceMode = BSP_XSPI_NOR_SPI_MODE;    /* After reset H/W back to SPI mode by default */
+    XSPI_Nor_Ctx[Instance].TransferRate  = BSP_XSPI_NOR_STR_TRANSFER; /* After reset S/W setting to STR mode        */
   }
-
-  if (ResetRecoTime == 1U)
-  {
-    /* Reset memory in curent mode */
-    if (MX66UW1G45G_ResetEnable(&hxspi_nor[Instance], XSPI_Nor_Ctx[Instance].InterfaceMode,
-                                          XSPI_Nor_Ctx[Instance].TransferRate) != MX66UW1G45G_OK)
-    {
-      ret = BSP_ERROR_COMPONENT_FAILURE;
-    }
-    else if (MX66UW1G45G_ResetMemory(&hxspi_nor[Instance], XSPI_Nor_Ctx[Instance].InterfaceMode,
-                                     XSPI_Nor_Ctx[Instance].TransferRate) != MX66UW1G45G_OK)
-    {
-      ret = BSP_ERROR_COMPONENT_FAILURE;
-    }
-    else
-    {
-      /* No thing to do*/
-    }
-
-    /* After SWreset CMD, wait in case SWReset occurred during erase operation */
-    HAL_Delay(MX66UW1G45G_RESET_MAX_TIME);
-  }
-  else
-  {
-    /* Reset memory in all modes available */
-    if (MX66UW1G45G_ResetEnable(&hxspi_nor[Instance], BSP_XSPI_NOR_SPI_MODE,
-                                BSP_XSPI_NOR_STR_TRANSFER) != MX66UW1G45G_OK)
-    {
-      ret = BSP_ERROR_COMPONENT_FAILURE;
-    }
-    else if (MX66UW1G45G_ResetMemory(&hxspi_nor[Instance], BSP_XSPI_NOR_SPI_MODE,
-                                     BSP_XSPI_NOR_STR_TRANSFER) != MX66UW1G45G_OK)
-    {
-      ret = BSP_ERROR_COMPONENT_FAILURE;
-    }
-    else if (MX66UW1G45G_ResetEnable(&hxspi_nor[Instance], BSP_XSPI_NOR_OPI_MODE,
-                                     BSP_XSPI_NOR_STR_TRANSFER) != MX66UW1G45G_OK)
-    {
-      ret = BSP_ERROR_COMPONENT_FAILURE;
-    }
-    else if (MX66UW1G45G_ResetMemory(&hxspi_nor[Instance], BSP_XSPI_NOR_OPI_MODE,
-                                     BSP_XSPI_NOR_STR_TRANSFER) != MX66UW1G45G_OK)
-    {
-      ret = BSP_ERROR_COMPONENT_FAILURE;
-    }
-    else if (MX66UW1G45G_ResetEnable(&hxspi_nor[Instance], BSP_XSPI_NOR_OPI_MODE,
-                                     BSP_XSPI_NOR_DTR_TRANSFER) != MX66UW1G45G_OK)
-    {
-      ret = BSP_ERROR_COMPONENT_FAILURE;
-    }
-    else if (MX66UW1G45G_ResetMemory(&hxspi_nor[Instance], BSP_XSPI_NOR_OPI_MODE,
-                                     BSP_XSPI_NOR_DTR_TRANSFER) != MX66UW1G45G_OK)
-    {
-      ret = BSP_ERROR_COMPONENT_FAILURE;
-    }
-    else
-    {
-      /* No thing to do*/
-    }
-  }
-
-  XSPI_Nor_Ctx[Instance].IsInitialized = XSPI_ACCESS_INDIRECT;      /* After reset S/W setting to indirect access  */
-  XSPI_Nor_Ctx[Instance].InterfaceMode = BSP_XSPI_NOR_SPI_MODE;     /* After reset H/W back to SPI mode by default */
-  XSPI_Nor_Ctx[Instance].TransferRate  = BSP_XSPI_NOR_STR_TRANSFER; /* After reset S/W setting to STR mode         */
 
   /* Return BSP status */
   return ret;

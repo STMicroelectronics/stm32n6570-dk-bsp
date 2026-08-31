@@ -15,6 +15,36 @@ This driver provides a set of functions to manage:
 
 # Update History
 
+<label for="collapse-section6" checked aria-hidden="true">__V1.4.1 / 31-July-2026__</label>
+<div>
+
+## Main Changes
+
+###  Fifth maintenance release of board drivers supporting **STM32N6570-DK board** (MB1939C)
+
+
+## Contents
+
+  - stm32n6570_discovery_xspi update:
+    - Fix XSPI_NOR_ResetMemory() to reset the memory in all modes without relying on context, and skip the WIP check during reset.
+
+## Known Limitations
+
+  - None
+
+## Dependencies
+
+  - ISP library v1.2.1
+
+## Notes
+
+
+*stm32n6570_discovery_conf_template.h* file must be copied in user application as *stm32n6570_discovery_conf.h* with optional configuration update
+
+
+
+</div>
+
 <label for="collapse-section5" checked aria-hidden="true">__V1.4.0 / 03-June-2026__</label>
 <div>
 
